@@ -41,14 +41,17 @@ class Login extends CI_Controller
     else
     {
       $executa=$this->login_model->set_verifica_login();
-      $user=$_COOKIE["user"];
       if($executa==true){
+        // print_r($_COOKIE["user"]);
+        $user=$_COOKIE["user"];
         $data['email']=$user;
         $this->load->view('templates/header',$data);
         $this->load->view('templates/carrossel');
         $this->load->view('templates/footer');
       }else{
-        $this->load->view('templates/header');
+        // print_r($_COOKIE["user"]);
+        $data['email']="";
+        $this->load->view('templates/header',$data);
         $this->load->view('templates/carrossel');
         $this->load->view('templates/footer');
 
@@ -94,7 +97,8 @@ class Login extends CI_Controller
   {
     // $teste=$this->input->post('user');
     // unset($_COOKIE["logado"]);
-    set_cookie("logado",0);
+    // set_cookie("logado",0);
+    $_COOKIE['logado']=0;
     $data['email']="";
     $this->load->view('templates/header',$data);
     $this->load->view('templates/carrossel');
